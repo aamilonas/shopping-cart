@@ -23,6 +23,9 @@ const IForm = (props) => {
     textAlign: "center",
     color: "#eb6f92",
   };
+  const titleStyle = {
+    fontFamily: "Snell Roundhand, cursive",
+  };
 
   const [errors, setErrors] = useState([]);
 
@@ -72,7 +75,7 @@ const IForm = (props) => {
   };
   return (
     <>
-      <Form.Label htmlFor="item" className=" fs-2">
+      <Form.Label style={titleStyle} htmlFor="item" className=" fs-1">
         Angelo's Shopping Cart Application
       </Form.Label>
       <br />
