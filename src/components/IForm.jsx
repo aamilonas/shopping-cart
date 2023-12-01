@@ -84,6 +84,30 @@ const IForm = (props) => {
       }}
     />
   );
+  const DottedLine = () => (
+    <hr
+      style={{
+        color: "black",
+        height: 5,
+        borderTop: "dotted",
+      }}
+    />
+  );
+
+  // const sTot = itemList.reduce((a, v) => (a = a + v.subtotal), 0).toFixed(2);
+  // const tRate = (sTot * 0.06).toFixed(2);
+  // const Tot = sTot + tRate;
+  const calcTotal = (subt) => {
+    const frst = subt * 0.06;
+    const total = Number(frst) + Number(subt);
+    return total;
+  };
+
+  function handleRemove(iname) {
+    const newList = itemList.filter((item) => item.iname !== iname);
+
+    setItemList(newList);
+  }
 
   return (
     <>
@@ -96,7 +120,6 @@ const IForm = (props) => {
         <Image src={sbag} height={250} width={210} />
       </div>
       <br />
-
       <Container>
         <Row xs={2} md={4} lg={6}>
           <Col xs lg="3">
@@ -176,13 +199,63 @@ const IForm = (props) => {
       </Container>
       <ColoredLine color="black" />
       <h1>Your Cart</h1>
-      <DisplayList list={itemList} />
-      {/* {itemList.length > 0 ? (
-        Add the total stuff here
-      ) : (
-        <p> </p>
-      )} */}
+      {/* <DisplayList list={itemList} /> */}
+      {itemList.length > 0 &&
+        itemList.map((item, i) => (
+          <Container>
+            <Row xs={2} md={4} lg={6}>
+              <Col xs lg="3">
+                <p className="fs-5">🍽️ &emsp; {item.iname}</p>
+              </Col>
+              <Col md={{ span: 6, offset: 0 }}>
+                <p className="fs-5">{item.quantity}</p>
+              </Col>
+              <Col>
+                <p className="fs-5">$ {Number(item.price).toFixed(2)}</p>
+              </Col>
+              <Col>
+                <p className="fs-5">$ {item.subtotal.toFixed(2)}</p>
+              </Col>
+              <Col>
+                <Button
+                  variant="outline-danger"
+                  onClick={() => handleRemove(item.iname)}
+                >
+                  Remove
+                </Button>{" "}
+              </Col>
+            </Row>
+          </Container>
+        ))}
+      <ColoredLine color="grey" />
+      <Row>
+        <Col xs lg="2">
+          <h3>Subtotal</h3>
+        </Col>
+        <Col xs lg="1">
+          $ {itemList.reduce((a, v) => (a = a + v.subtotal), 0).toFixed(2)}
+        </Col>
+        <Col>
+          (+6% Tax) $
+          {itemList.reduce((a, v) => (a = a + v.subtotal), 0).toFixed(2) * 0.06}
+        </Col>
+      </Row>
+      <DottedLine />
+      <Row>
+        <Col xs lg="2">
+          <h2>Total</h2>
+        </Col>
+        <Col>
+          <h2>
+            ${" "}
+            {calcTotal(
+              itemList.reduce((a, v) => (a = a + v.subtotal), 0).toFixed(2)
+            )}
+          </h2>
+        </Col>
+      </Row>
     </>
   );
 };
 export default IForm;
+//xs={2} md={4} lg={6}

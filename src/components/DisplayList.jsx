@@ -5,9 +5,9 @@ import Button from "react-bootstrap/Button";
 import React, { useState } from "react";
 
 const DisplayList = (props) => {
-  const [list, setList] = useState({ ...props });
+  //const [list, setList] = useState({ ...props });
 
-  //{list} = props;
+  const { list } = props;
   //const { list } = props;
 
   const OutputStyle = {
@@ -26,9 +26,6 @@ const DisplayList = (props) => {
 
   function handleRemove(iname) {
     console.log(iname);
-    const newList = list.filter((item) => item.iname !== iname);
-
-    setList(newList);
   }
 
   return list.map((item, i) => (
