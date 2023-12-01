@@ -25,6 +25,7 @@ const IForm = (props) => {
   };
   const titleStyle = {
     fontFamily: "Snell Roundhand, cursive",
+    fontSize: "50px",
   };
 
   const [errors, setErrors] = useState([]);
@@ -73,9 +74,20 @@ const IForm = (props) => {
       setErrors([]);
     }
   };
+
+  const ColoredLine = ({ color }) => (
+    <hr
+      style={{
+        color: color,
+        backgroundColor: color,
+        height: 5,
+      }}
+    />
+  );
+
   return (
     <>
-      <Form.Label style={titleStyle} htmlFor="item" className=" fs-1">
+      <Form.Label style={titleStyle} htmlFor="item">
         Angelo's Shopping Cart Application
       </Form.Label>
       <br />
@@ -162,6 +174,8 @@ const IForm = (props) => {
           ))}
         </Row>
       </Container>
+      <ColoredLine color="black" />
+      <h1>Your Cart</h1>
       <DisplayList list={itemList} />
       {/* {itemList.length > 0 ? (
         Add the total stuff here
